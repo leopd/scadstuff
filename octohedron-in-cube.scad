@@ -1,4 +1,4 @@
-$fn = 50;
+$fn = 70;
 
 module opencube(size) {
     difference() {
@@ -25,5 +25,4 @@ module octahedron(size) {
 }
 
 octahedron(5.8);
-
 opencube(10);
