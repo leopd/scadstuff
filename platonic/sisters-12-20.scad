@@ -43,8 +43,33 @@ module openicosahedron() {
     }
 }
 
+module mesh_star(size, n) {
+    scale(size/10) {
+        for( i = [0 : n] ) {
+            rotate([i * 180 / n,0,0]) cylinder(10, 0.1, 0.1, center=true);
+        }
+    }
+}
+
+
+module dodecamesh(cnt) {
+    size=1;
+    intersection() {
+        for( rot = [[0,90,0],
+                    [0,-26,18], [0,-26,18+72], [0,-26,18+2*72],
+                    [0,-26,18+3*72], [0,-26,18+4*72], 
+        ]) {
+            rotate(rot) {
+                translate([size/2,0,0]) mesh_star(size*0.6, cnt);
+                translate([-size/2,0,0]) mesh_star(size*0.6, cnt);
+            }
+        }
+        dodecahedron(center=true);
+    }
+}
 
 $fn = 50;
 
 scale(5) opendodecahedron();
-color([0.8,1.0,0.1]) scale(6.63) icosahedron();
+scale(5) dodecamesh(5);
+color([1.0,0.7,0.1]) scale(6.6) icosahedron();
