@@ -31,7 +31,6 @@ module openoctahedron(size) {
     }
 }
 
-openoctahedron(5.8);
 opencube(10);
-
-//openoctohedron(10);
+openoctahedron(5.8);
+opencube(3.4);
