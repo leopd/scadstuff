@@ -1,6 +1,6 @@
 $fn = 70;
 
-module opencubenomesh(size) {
+module opencube(size) {
     difference() {
         cube(size, center=true);
         sphere(size*2/3);
@@ -40,14 +40,12 @@ module mesh_star(size, n) {
     }
 }
 
-module opencube(size) {
-    opencubenomesh(size);
-
+module cubemesh(size, cnt) {
     intersection() {
         for( rot = [[0,0,0],[0,90,0], [0,0,90]]) {
             rotate(rot) {
-                translate([size/2,0,0]) mesh_star(size, 8);
-                translate([-size/2,0,0]) mesh_star(size, 8);
+                translate([size/2,0,0]) mesh_star(size, cnt);
+                translate([-size/2,0,0]) mesh_star(size, cnt);
             }
         }
         cube(size, center=true);
@@ -55,13 +53,16 @@ module opencube(size) {
 }
 
 
+module octamesh(size) {
+}
 
-//opencubemesh(5);
 
-opencube(10);
-openoctahedron(5.8);
-opencube(3.4);
-openoctahedron(1.97);
-opencube(1.21);
+opencube(100);
+cubemesh(100, 4);
+octahedron(58);
+//openoctahedron(58);
+//opencube(34);
+//openoctahedron(20);
+//opencubenomesh(12);
 
 
