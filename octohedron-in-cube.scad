@@ -24,5 +24,14 @@ module octahedron(size) {
     }
 }
 
-octahedron(5.8);
+module openoctahedron(size) {
+    difference() {
+        octahedron(size);
+        sphere(size*0.57);
+    }
+}
+
+openoctahedron(5.8);
 opencube(10);
+
+//openoctohedron(10);
