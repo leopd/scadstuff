@@ -54,25 +54,48 @@ module mesh_star(size, n, offset=0.333) {
     }
 }
 
-
 module dodecamesh(cnt) {
-    size=1;
     intersection() {
         for( rot = [[0,90,0],
                     [0,-26,18], [0,-26,18+72], [0,-26,18+2*72],
                     [0,-26,18+3*72], [0,-26,18+4*72], 
         ]) {
             rotate(rot) {
-                translate([size/2,0,0]) mesh_star(size*0.6, cnt);
-                translate([-size/2,0,0]) mesh_star(size*0.6, cnt);
+                translate([0.5,0,0]) mesh_star(0.6, cnt);
+                translate([-0.5,0,0]) mesh_star(0.6, cnt);
             }
         }
         dodecahedron(center=true);
     }
 }
 
-$fn = 50;
+module icosamesh(cnt) {
+    intersection() {
+        h = 10;
+        j = 53;
+        for( rot = [
+                    [0,h,18], [0,h,18+72], [0,h,18+2*72], [0,h,18+3*72], [0,h,18+4*72], 
+                    [0,j,18], [0,j,18+72], [0,j,18+2*72], [0,j,18+3*72], [0,j,18+4*72], 
+        
+        ]) {
+            rotate(rot) {
+                translate([0.3,0,0]) mesh_star(0.25, cnt);
+                translate([-0.3,0,0]) mesh_star(0.25, cnt);
+            }
+        }
+        icosahedron(center=true);
+    }
+}
 
-scale(5) opendodecahedron();
-scale(5) dodecamesh(5);
-color([1.0,0.7,0.1]) scale(6.57) icosahedron();
+
+$fn = 70;
+
+scale(5) {
+    opendodecahedron();
+    dodecamesh(5);
+}
+color([1.0,0.7,0.1]) scale(6.57) {
+    openicosahedron();
+    icosamesh(5);
+}
+scale(3.2) dodecahedron();
