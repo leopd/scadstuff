@@ -21,7 +21,7 @@ module opendodecahedron() {
 }
 
 module icosahedron(a = 2) {
-    rotate([0,32,17.5]) scale(0.1) {
+    rotate([0,31.5,17]) scale(0.1) {
         phi = a * ((1 + sqrt(5)) / 2);
         polyhedron(
             points = [
@@ -43,10 +43,13 @@ module openicosahedron() {
     }
 }
 
-module mesh_star(size, n) {
+module mesh_star(size, n, offset=0.333) {
     scale(size/10) {
         for( i = [0 : n] ) {
-            rotate([i * 180 / n,0,0]) cylinder(10, 0.1, 0.1, center=true);
+            rotate([(offset + i) * 360 / n,0,0]) { 
+                translate([0,0,0])
+                cylinder(5, 0.1, 0.1);
+            }
         }
     }
 }
@@ -72,4 +75,4 @@ $fn = 50;
 
 scale(5) opendodecahedron();
 scale(5) dodecamesh(5);
-color([1.0,0.7,0.1]) scale(6.6) icosahedron();
+color([1.0,0.7,0.1]) scale(6.57) icosahedron();
