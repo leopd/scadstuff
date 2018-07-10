@@ -52,6 +52,34 @@ module cubemesh(size, cnt) {
     }
 }
 
+module cubecorners(outer,inner) {
+    th = 35.3;
+    intersection() {
+        for( rot = [
+                    [0,-th,45], [0,-th,135], [0,-th,-45], [0,-th,-135],
+                    [0,th,45], [0,th,135], [0,th,-45], [0,th,-135],
+        ]) {
+            rotate(rot) {
+                translate([0,-1,-1])
+                  cube([outer,2,2]);
+            }
+        }
+        cube(outer, center=true);
+    }
+}
+
+module octacorners(outer,inner) {
+    for( rot = [
+            [0,0,0], [0,90,0], [0,0,90],
+            [0,180,0], [0,270,0], [0,0,270],
+    ]) {
+        rotate(rot) {
+            translate([0,-1,-1])
+              cube([outer,2,2]);
+        }
+    }
+}
+
 
 module octamesh(size) {
   // TODO
