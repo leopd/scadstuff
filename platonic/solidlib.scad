@@ -40,12 +40,12 @@ module mesh_star(size, n) {
     }
 }
 
-module cubemesh(size, cnt) {
+module cubemesh(size, cnt, offset=0) {
     intersection() {
         for( rot = [[0,0,0],[0,90,0], [0,0,90]]) {
             rotate(rot) {
-                translate([size/2,0,0]) mesh_star(size, cnt);
-                translate([-size/2,0,0]) mesh_star(size, cnt);
+                translate([size/2,0,0]) mesh_star(size, cnt, offset);
+                translate([-size/2,0,0]) mesh_star(size, cnt, offset);
             }
         }
         cube(size, center=true);
@@ -128,7 +128,7 @@ module openicosahedron() {
 }
 
 
-module mesh_star(size, n, offset=0.333) {
+module mesh_star(size, n, offset=0) {
     scale(size/10) {
         for( i = [0 : n] ) {
             rotate([(offset + i) * 360 / n,0,0]) { 
