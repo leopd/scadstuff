@@ -5,18 +5,20 @@ module opencube(size) {
     }
 }
 
-module box(size) {
-    cube([2*size, 2*size, size], center = true); 
+module box() {
+    cube([2, 2, 1], center = true); 
 }
 
+
 module octahedron(size) {
-    rotate([125,0,135]) {
+    rotate([125,0,135]) 
+      scale(size) {
         dihedral = 109.47122;
         n = 3;
         intersection(){
-            box(size);
+            box();
             intersection_for(i=[1:n])  { 
-                rotate([dihedral, 0, 360 /n * i])  box(size); 
+                rotate([dihedral, 0, 360 /n * i])  box(); 
            }
         }
     }
@@ -55,10 +57,6 @@ module octamesh(size) {
   // TODO
 }
 
-
-module box() {
-    cube([2, 2, 1], center = true); 
-}
 
 
 module dodecahedron() {
@@ -100,6 +98,7 @@ module openicosahedron() {
         sphere(0.316);
     }
 }
+
 
 module mesh_star(size, n, offset=0.333) {
     scale(size/10) {
