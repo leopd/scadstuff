@@ -1,10 +1,10 @@
 use <solidlib.scad>
 
-$fn = 25;
+$fn = 60;
 
 opencube(100);
-cubecorners(100, 58);
+cubecorners(100, 58, 4);
 openoctahedron(58);
 opencube(34);
 octahedron(20);
-octacorners(48);
+octacorners(46, 0, 3);

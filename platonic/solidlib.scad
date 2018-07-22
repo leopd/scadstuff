@@ -52,7 +52,7 @@ module cubemesh(size, cnt, offset=0) {
     }
 }
 
-module cubecorners(outer,inner) {
+module cubecorners(outer,inner, thickness=2) {
     th = 35.3;
     intersection() {
         for( rot = [
@@ -61,21 +61,21 @@ module cubecorners(outer,inner) {
         ]) {
             rotate(rot) {
                 translate([0,-1,-1])
-                  cube([outer,2,2]);
+                  cube([outer,thickness,thickness]);
             }
         }
         cube(outer, center=true);
     }
 }
 
-module octacorners(outer,inner) {
+module octacorners(outer,inner, thickness=2) {
     for( rot = [
             [0,0,0], [0,90,0], [0,0,90],
             [0,180,0], [0,270,0], [0,0,270],
     ]) {
         rotate(rot) {
             translate([0,-1,-1])
-              cube([outer,2,2]);
+              cube([outer, thickness, thickness]);
         }
     }
 }
